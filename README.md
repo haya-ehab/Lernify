@@ -115,7 +115,7 @@ Security-first approach with robust authentication and data protection
 │   │   ├── 🛠️ utils/           # Helper functions
 │   │   └── 🎯 types/           # TypeScript definitions
 │   └── 📦 package.json
-├── ⚙️ backend/                  # NestJS server application
+├──  backend/                  # NestJS server application
 │   ├── 📂 src/
 │   │   ├── 📋 modules/         # Feature modules
 │   │   ├── 🛡️ guards/          # Authentication guards
