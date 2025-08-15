@@ -42,7 +42,6 @@ Security-first approach with robust authentication and data protection
 ## ✨ Feature Showcase
 
 ### 🔐 **Authentication & Security**
-- 🔑 Multi-factor authentication
 - 🛡️ JWT-based secure sessions
 - 👥 Role-based access control (Student, Instructor, Admin)
 - 🔒 Data encryption & privacy protection
@@ -50,11 +49,9 @@ Security-first approach with robust authentication and data protection
 ### 📚 **Course Management**
 - 🎨 Interactive course builder
 - 📅 Scheduling & calendar integration
-- 🎯 Learning path customization
 - 📈 Enrollment analytics
 
 ### 📂 **Rich Content Management**
-- 🎥 Video streaming & hosting
 - 📄 Document management
 - 🖼️ Interactive media support
 - 📱 Mobile-optimized content
@@ -63,25 +60,22 @@ Security-first approach with robust authentication and data protection
 - 🤖 AI-powered auto-grading
 - 📊 Real-time analytics
 - 💬 Personalized feedback
-- 🏆 Gamification elements
+
 
 ### 📊 **Advanced Analytics**
 - 📈 Student progress tracking
 - 🎯 Performance insights
-- 📉 Dropout prediction
-- 📋 Custom reporting dashboards
+
 
 ### 🎓 **Digital Certificates**
 - 🏅 Blockchain-verified certificates
-- 🎨 Customizable templates
 - 📧 Automated distribution
-- 🔍 Public verification portal
+
 
 ### 💬 **Social Learning**
 - 💭 Real-time chat & messaging
 - 🗣️ Discussion forums
 - 👥 Study groups
-- 🤝 Peer collaboration tools
 
 ---
 
