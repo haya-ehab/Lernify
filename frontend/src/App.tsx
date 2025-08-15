@@ -1,11 +1,18 @@
-function App() {
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import InstructorDashboard from "./pages/InstructorDashboard";
+
+import CreateCourseForm from "./components/CreateCourseForm";
+
+
+
+export default function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-      <h1 className="text-5xl font-bold text-white shadow-lg">
-        Tailwind is Working! 🚀
-      </h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/instructor" element={<InstructorDashboard />} />
+        <Route path="/instructor/create-course" element={<CreateCourseForm />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
