@@ -5,6 +5,11 @@ import CreateCourseForm from "../components/CreateCourseForm"
 import { FaBook, FaUserGraduate, FaBox } from "react-icons/fa"
 
 export default function InstructorDashboard() {
+  // Temporary placeholders to avoid errors
+  const notificationCount = 0
+  const performanceData = { growth: "12%", comparison: "↑ 5% vs last month" }
+  const activity = { timeAgo: "2h ago", message: "New student enrolled" }
+
   return (
     <div className="flex">
       {/* Sidebar - now positioned on the left */}
@@ -35,25 +40,27 @@ export default function InstructorDashboard() {
                     Your teaching dashboard is ready. Manage courses, track student progress, and create engaging
                     content.
                   </p>
-                  <div className="flex items-center space-x-6 text-green-100">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg">📅</span>
-                      <span>Today, August 15, 2025</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg">🔔</span>
-                      <span>3 new notifications</span>
-                    </div>
-                  </div>
+                  <span>
+                    Today,{" "}
+                    {new Date().toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
                 </div>
-                <div className="hidden lg:block">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                    <div className="flex items-center space-x-3 mb-3">
-                      <span className="text-2xl">📊</span>
-                      <span className="text-lg font-semibold">Performance</span>
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg">🔔</span>
+                  <span>{notificationCount || 0} new notifications</span>
+                  <div className="hidden lg:block">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <span className="text-2xl">📊</span>
+                        <span className="text-lg font-semibold">Performance</span>
+                      </div>
+                      <div className="text-3xl font-bold">{performanceData?.growth || "—"}</div>
+                      <div className="text-sm text-green-200">{performanceData?.comparison || "No data"}</div>
                     </div>
-                    <div className="text-3xl font-bold">+24%</div>
-                    <div className="text-sm text-green-200">vs last month</div>
                   </div>
                 </div>
               </div>
@@ -138,16 +145,17 @@ export default function InstructorDashboard() {
                   <span className="text-sm text-gray-500">Last 7 days</span>
                 </div>
                 <div className="space-y-4">
+                  {/* Example Activity */}
                   <div className="flex items-center space-x-4 p-3 bg-green-50 rounded-xl border-l-4 border-green-400">
                     <div className="bg-green-100 p-2 rounded-lg">
                       <span className="text-green-600">🎓</span>
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold text-gray-800">New student enrolled</p>
-                      <p className="text-sm text-gray-600">Advanced React Development</p>
+                      <p className="font-semibold text-gray-800">{activity.message}</p>
+                      <span className="text-xs text-gray-500">{activity.timeAgo}</span>
                     </div>
-                    <span className="text-xs text-gray-500">2h ago</span>
                   </div>
+
                   <div className="flex items-center space-x-4 p-3 bg-blue-50 rounded-xl border-l-4 border-blue-400">
                     <div className="bg-blue-100 p-2 rounded-lg">
                       <span className="text-blue-600">📚</span>
@@ -166,12 +174,12 @@ export default function InstructorDashboard() {
                 <h3 className="text-lg font-bold mb-4">This Month's Highlights</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4">
-                    <div className="text-2xl font-bold">87%</div>
-                    <div className="text-sm text-purple-100">Completion Rate</div>
+                    <div className="text-3xl font-bold">{performanceData?.growth || "—"}</div>
+                    <div className="text-sm text-green-200">{performanceData?.comparison || "No data"}</div>
                   </div>
                   <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4">
-                    <div className="text-2xl font-bold">4.9</div>
-                    <div className="text-sm text-purple-100">Avg Rating</div>
+                    <div className="text-3xl font-bold">{performanceData?.growth || "—"}</div>
+                    <div className="text-sm text-green-200">{performanceData?.comparison || "No data"}</div>
                   </div>
                 </div>
               </div>
