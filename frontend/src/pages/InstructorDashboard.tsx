@@ -40,27 +40,7 @@ export default function InstructorDashboard() {
                     Your teaching dashboard is ready. Manage courses, track student progress, and create engaging
                     content.
                   </p>
-                  <span>
-                    Today,{" "}
-                    {new Date().toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-lg">🔔</span>
-                  <span>{notificationCount || 0} new notifications</span>
-                  <div className="hidden lg:block">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                      <div className="flex items-center space-x-3 mb-3">
-                        <span className="text-2xl">📊</span>
-                        <span className="text-lg font-semibold">Performance</span>
-                      </div>
-                      <div className="text-3xl font-bold">{performanceData?.growth || "—"}</div>
-                      <div className="text-sm text-green-200">{performanceData?.comparison || "No data"}</div>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -145,16 +125,12 @@ export default function InstructorDashboard() {
                   <span className="text-sm text-gray-500">Last 7 days</span>
                 </div>
                 <div className="space-y-4">
-                  {/* Example Activity */}
+
                   <div className="flex items-center space-x-4 p-3 bg-green-50 rounded-xl border-l-4 border-green-400">
                     <div className="bg-green-100 p-2 rounded-lg">
                       <span className="text-green-600">🎓</span>
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold text-gray-800">{activity.message}</p>
-                      <span className="text-xs text-gray-500">{activity.timeAgo}</span>
-                    </div>
-                  </div>
 
                   <div className="flex items-center space-x-4 p-3 bg-blue-50 rounded-xl border-l-4 border-blue-400">
                     <div className="bg-blue-100 p-2 rounded-lg">
@@ -174,12 +150,7 @@ export default function InstructorDashboard() {
                 <h3 className="text-lg font-bold mb-4">This Month's Highlights</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4">
-                    <div className="text-3xl font-bold">{performanceData?.growth || "—"}</div>
-                    <div className="text-sm text-green-200">{performanceData?.comparison || "No data"}</div>
-                  </div>
-                  <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4">
-                    <div className="text-3xl font-bold">{performanceData?.growth || "—"}</div>
-                    <div className="text-sm text-green-200">{performanceData?.comparison || "No data"}</div>
+
                   </div>
                 </div>
               </div>
