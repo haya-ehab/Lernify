@@ -2,13 +2,15 @@ import { Link } from "react-router-dom"
 
 export default function Sidebar() {
   const menuItems = [
-    { name: "Overview", icon: "📊", path: "#", isActive: true },
-    { name: "Courses", icon: "📚", path: "#", isActive: false },
-    { name: "Students", icon: "🎓", path: "#", isActive: false },
-    { name: "Teachers", icon: "👨‍🏫", path: "#", isActive: false },
-    { name: "Analytics", icon: "📈", path: "#", isActive: false },
-    { name: "Settings", icon: "⚙️", path: "#", isActive: false },
-  ]
+     { name: "Overview", icon: "📊", path: "/instructor", isActive: true },
+   { name: "My Courses", icon: "📚", path: "/course-catalog", isActive: false },
+   { name: "Students", icon: "🎓", path: "/lesson-viewer", isActive: false },
+  { name: "Teachers", icon: "👨‍🏫", path: "/instructor/teachers", isActive: false },
+  { name: "Analytics", icon: "📈", path: "/instructor/analytics", isActive: false },
+   { name: "Settings", icon: "⚙️", path: "/instructor/settings", isActive: false },
+ ]
+
+
 
   return (
     <aside className="w-72 min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden shadow-2xl">
