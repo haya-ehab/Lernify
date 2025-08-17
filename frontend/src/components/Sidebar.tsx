@@ -2,9 +2,9 @@ import { Link } from "react-router-dom"
 
 export default function Sidebar() {
   const menuItems = [
-    { name: "Dashboard", path: "/", icon: "📊", isActive: true },
+    { name: "Your Dashboard", path: "/instructor-dashboard", icon: "📊", isActive: true },
     { name: "Courses", path: "/course-catalog", icon: "📚", isActive: false },
-    { name: "Students", path: "/students", icon: "👩‍🎓", isActive: false },
+    { name: "Students", path: "/student-dashboard", icon: "👩‍🎓", isActive: false },
     { name: "View Lessons", path: "/lesson-viewer", icon: "👁️‍🗨️", isActive: false },
     { name: "Assignments", path: "/assignments", icon: "📝", isActive: false },
     { name: "Settings", path: "/settings", icon: "⚙️", isActive: false },
