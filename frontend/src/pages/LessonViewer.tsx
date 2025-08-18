@@ -58,7 +58,7 @@ export default function LessonViewer() {
   const [activeTab, setActiveTab] = useState("content")
   const [ReactPlayer, setReactPlayer] = useState<any>(null)
 
-
+  
 
   const getTypeIcon = (type: string) => {
     switch (type) {
