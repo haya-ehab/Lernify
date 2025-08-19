@@ -52,12 +52,15 @@ export default function QuizPage() {
       },
     }
 
-    // ✅ send JSON string
-    sendMessage(JSON.stringify(quizData))
+    // ✅ send JSON string (surface connection issues)
+const sent = sendMessage(JSON.stringify(quizData));
+if (!sent) {
+  alert("⚠️ Unable to publish: WebSocket is not connected. Please try again.");
+  return;
+}
 
-    alert("✅ Quiz published successfully!")
-    setQuestions([])
-  }
+alert("✅ Quiz published successfully!");
+setQuestions([]);
 
   return (
     <div className="min-h-screen bg-white p-4 md:p-8">
@@ -228,4 +231,4 @@ export default function QuizPage() {
       </div>
     </div>
   )
-}
+} }
