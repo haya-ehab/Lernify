@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useWebSocket } from "../context/WebSocketProvider"
+import { useWebSocket } from '../context/WebSocketProvider'
 
 interface Question {
   id: number
@@ -38,6 +38,7 @@ export default function QuizPage() {
     setCorrectAnswer(0)
   }
 
+  // Publish quiz via WebSocket
   const handlePublishQuiz = () => {
     if (questions.length === 0) {
       alert("You must add at least one question before publishing.")
@@ -52,15 +53,16 @@ export default function QuizPage() {
       },
     }
 
-    // ✅ send JSON string (surface connection issues)
-const sent = sendMessage(JSON.stringify(quizData));
-if (!sent) {
-  alert("⚠️ Unable to publish: WebSocket is not connected. Please try again.");
-  return;
-}
+    // Send JSON string
+    const sent = sendMessage(JSON.stringify(quizData))
+    if (!sent) {
+      alert("⚠️ Unable to publish: WebSocket is not connected. Please try again.")
+      return
+    }
 
-alert("✅ Quiz published successfully!");
-setQuestions([]);
+    alert("✅ Quiz published successfully!")
+    setQuestions([])
+  }
 
   return (
     <div className="min-h-screen bg-white p-4 md:p-8">
@@ -231,4 +233,4 @@ setQuestions([]);
       </div>
     </div>
   )
-} }
+}

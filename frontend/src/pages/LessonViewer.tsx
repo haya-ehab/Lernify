@@ -1,4 +1,5 @@
-
+import React, { useState } from "react"
+import ReactPlayer from "react-player"
 
 type Lesson = {
   id: string
@@ -29,7 +30,8 @@ export default function LessonViewer() {
     },
   ])
 
-
+  const [completedLessons, setCompletedLessons] = useState<string[]>([])
+  const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null)
 
   // Modal state
   const [showForm, setShowForm] = useState(false)
@@ -57,7 +59,14 @@ export default function LessonViewer() {
     setShowForm(true)
   }
 
-
+  const handleSubmit = () => {
+    if (editingLesson) {
+      // Update existing lesson
+      setLessons(
+        lessons.map((l) =>
+          l.id === editingLesson.id ? { ...l, ...formData } : l
+        )
+      )
     } else {
       // Add new lesson
       setLessons([...lessons, { id: Date.now().toString(), ...formData }])
@@ -106,9 +115,11 @@ export default function LessonViewer() {
       <div className="flex-1 p-8 bg-white">
         {selectedLesson ? (
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-black">{selectedLesson.title}</h1>
+            <h1 className="text-3xl font-bold text-black">
+              {selectedLesson.title}
+            </h1>
 
-            {/* Responsive Video Player */}
+            {/* Video */}
             {selectedLesson.type === "video" && (
               <div className="relative w-full pb-[56.25%] rounded-xl overflow-hidden border border-gray-200 shadow-lg">
                 <ReactPlayer
@@ -121,6 +132,7 @@ export default function LessonViewer() {
               </div>
             )}
 
+            {/* PDF */}
             {selectedLesson.type === "pdf" && (
               <iframe
                 src={selectedLesson.url}
@@ -128,6 +140,8 @@ export default function LessonViewer() {
                 className="w-full h-[500px] border border-gray-200 rounded-lg shadow-lg"
               />
             )}
+
+            {/* Link */}
             {selectedLesson.type === "link" && (
               <a
                 href={selectedLesson.url}
@@ -150,7 +164,9 @@ export default function LessonViewer() {
                 }`}
                 disabled={completedLessons.includes(selectedLesson.id)}
               >
-                {completedLessons.includes(selectedLesson.id) ? "✅ Completed" : "Mark as Complete"}
+                {completedLessons.includes(selectedLesson.id)
+                  ? "✅ Completed"
+                  : "Mark as Complete"}
               </button>
               <button
                 onClick={() => handleOpenForm(selectedLesson)}
@@ -167,16 +183,20 @@ export default function LessonViewer() {
         )}
       </div>
 
-      {/* Modal for add/edit lesson */}
+      {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-8 rounded-xl w-96 shadow-2xl border border-gray-200">
-            <h2 className="text-xl font-bold mb-6 text-black">{editingLesson ? "Edit Lesson" : "Add Lesson"}</h2>
+            <h2 className="text-xl font-bold mb-6 text-black">
+              {editingLesson ? "Edit Lesson" : "Add Lesson"}
+            </h2>
             <input
               type="text"
               placeholder="Lesson Title"
               value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
               className="w-full border border-gray-300 p-3 mb-4 rounded-lg focus:outline-none focus:border-black text-black"
             />
             <select
@@ -197,7 +217,9 @@ export default function LessonViewer() {
               type="text"
               placeholder="Lesson URL"
               value={formData.url}
-              onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, url: e.target.value })
+              }
               className="w-full border border-gray-300 p-3 mb-6 rounded-lg focus:outline-none focus:border-black text-black"
             />
             <div className="flex justify-end gap-3">
