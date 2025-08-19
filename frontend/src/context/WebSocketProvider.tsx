@@ -1,24 +1,47 @@
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 
-import { createContext, useEffect, useState, ReactNode } from "react";
+interface WebSocketContextType {
+  sendMessage: (msg: string) => void;
+  lastMessage: string | null;
+}
 
-export const WebSocketContext = createContext<WebSocket | null>(null);
+export const WebSocketContext = createContext<WebSocketContextType | undefined>(undefined);
 
-export function WebSocketProvider({ children }: { children: ReactNode }) {
-  const [socket, setSocket] = useState<WebSocket | null>(null);
+export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [lastMessage, setLastMessage] = useState<string | null>(null);
+  const ws = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080/ws");
-    setSocket(ws);
+    // change URL if backend uses another port
+    ws.current = new WebSocket("ws://localhost:8000/ws");
 
-    ws.onopen = () => console.log("✅ WS connected");
-    ws.onclose = () => console.log("🔌 WS closed");
+    ws.current.onmessage = (event) => {
+      setLastMessage(event.data);
+    };
 
-    return () => ws.close();
+    return () => {
+      ws.current?.close();
+    };
   }, []);
 
+  const sendMessage = (msg: string) => {
+    if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+      ws.current.send(msg);
+    }
+  };
+
   return (
-    <WebSocketContext.Provider value={socket}>
+    <WebSocketContext.Provider value={{ sendMessage, lastMessage }}>
       {children}
     </WebSocketContext.Provider>
   );
-}
+};
+
+// ✅ custom hook
+export const useWebSocket = () => {
+  const ctx = useContext(WebSocketContext);
+  if (!ctx) {
+    throw new Error("useWebSocket must be used within a WebSocketProvider");
+  }
+  return ctx;
+};

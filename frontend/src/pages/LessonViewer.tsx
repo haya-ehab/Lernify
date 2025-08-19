@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import ReactPlayer from "react-player"
 
@@ -62,11 +64,7 @@ export default function LessonViewer() {
   const handleSubmit = () => {
     if (editingLesson) {
       // Edit existing lesson
-      setLessons(
-        lessons.map((lesson) =>
-          lesson.id === editingLesson.id ? { ...lesson, ...formData } : lesson
-        )
-      )
+      setLessons(lessons.map((lesson) => (lesson.id === editingLesson.id ? { ...lesson, ...formData } : lesson)))
     } else {
       // Add new lesson
       setLessons([...lessons, { id: Date.now().toString(), ...formData }])
@@ -75,30 +73,30 @@ export default function LessonViewer() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-white">
       {/* Sidebar */}
-      <div className="w-1/4 bg-white p-4 shadow-md flex flex-col">
-        <h2 className="text-lg font-bold mb-4">Lessons</h2>
+      <div className="w-1/4 bg-white p-6 border-r border-gray-200 flex flex-col">
+        <h2 className="text-xl font-bold mb-6 text-black">Lessons</h2>
         <button
-          className="mb-4 bg-green-500 text-white px-3 py-2 rounded-md hover:bg-green-600"
+          className="mb-6 bg-black text-white px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium"
           onClick={() => handleOpenForm()}
         >
-          ➕ Add Lesson
+          + Add Lesson
         </button>
-        <ul>
+        <ul className="space-y-2">
           {lessons.map((lesson) => (
             <li
               key={lesson.id}
-              className={`p-2 rounded cursor-pointer flex justify-between items-center ${
+              className={`p-3 rounded-lg cursor-pointer flex justify-between items-center transition-colors border ${
                 completedLessons.includes(lesson.id)
-                  ? "bg-green-100"
-                  : "hover:bg-gray-200"
+                  ? "bg-gray-100 border-gray-300"
+                  : "hover:bg-gray-50 border-gray-200"
               }`}
               onClick={() => setSelectedLesson(lesson)}
             >
-              <span>{lesson.title}</span>
+              <span className="text-black font-medium">{lesson.title}</span>
               <button
-                className="text-sm text-blue-500"
+                className="text-sm text-black hover:text-gray-600 p-1"
                 onClick={(e) => {
                   e.stopPropagation()
                   handleOpenForm(lesson)
@@ -112,14 +110,14 @@ export default function LessonViewer() {
       </div>
 
       {/* Main viewer */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-8 bg-white">
         {selectedLesson ? (
-          <div className="space-y-4">
-            <h1 className="text-2xl font-bold">{selectedLesson.title}</h1>
+          <div className="space-y-6">
+            <h1 className="text-3xl font-bold text-black">{selectedLesson.title}</h1>
 
             {/* Responsive Video Player */}
             {selectedLesson.type === "video" && (
-              <div className="relative w-full pb-[56.25%] rounded-xl overflow-hidden shadow-md">
+              <div className="relative w-full pb-[56.25%] rounded-xl overflow-hidden border border-gray-200 shadow-lg">
                 <ReactPlayer
                   url={selectedLesson.url}
                   controls
@@ -134,7 +132,7 @@ export default function LessonViewer() {
               <iframe
                 src={selectedLesson.url}
                 title="PDF Viewer"
-                className="w-full h-[500px] border rounded-lg shadow"
+                className="w-full h-[500px] border border-gray-200 rounded-lg shadow-lg"
               />
             )}
             {selectedLesson.type === "link" && (
@@ -142,55 +140,51 @@ export default function LessonViewer() {
                 href={selectedLesson.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-blue-600 underline hover:text-blue-800"
+                className="inline-block text-black underline hover:text-gray-600 text-lg font-medium"
               >
                 🔗 Open Resource
               </a>
             )}
 
             {/* Button Row */}
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               <button
                 onClick={() => handleCompleteLesson(selectedLesson.id)}
-                className={`px-4 py-2 rounded-md shadow ${
+                className={`px-6 py-3 rounded-lg font-medium transition-colors ${
                   completedLessons.includes(selectedLesson.id)
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-blue-500 hover:bg-blue-600 text-white"
+                    ? "bg-gray-200 text-gray-500 cursor-not-allowed border border-gray-300"
+                    : "bg-black text-white hover:bg-gray-800 border border-black"
                 }`}
                 disabled={completedLessons.includes(selectedLesson.id)}
               >
-                {completedLessons.includes(selectedLesson.id)
-                  ? "✅ Completed"
-                  : "Mark as Complete"}
+                {completedLessons.includes(selectedLesson.id) ? "✅ Completed" : "Mark as Complete"}
               </button>
               <button
                 onClick={() => handleOpenForm(selectedLesson)}
-                className="px-4 py-2 rounded-md bg-yellow-400 text-black hover:bg-yellow-500 shadow"
+                className="px-6 py-3 rounded-lg bg-white text-black border border-black hover:bg-gray-50 font-medium transition-colors"
               >
                 ✏️ Edit
               </button>
             </div>
           </div>
         ) : (
-          <p className="text-gray-500">Select a lesson to view</p>
+          <div className="flex items-center justify-center h-full">
+            <p className="text-gray-500 text-lg">Select a lesson to view</p>
+          </div>
         )}
       </div>
 
       {/* Modal for add/edit lesson */}
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
-            <h2 className="text-lg font-bold mb-4">
-              {editingLesson ? "Edit Lesson" : "Add Lesson"}
-            </h2>
+          <div className="bg-white p-8 rounded-xl w-96 shadow-2xl border border-gray-200">
+            <h2 className="text-xl font-bold mb-6 text-black">{editingLesson ? "Edit Lesson" : "Add Lesson"}</h2>
             <input
               type="text"
               placeholder="Lesson Title"
               value={formData.title}
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
-              className="w-full border p-2 mb-3 rounded"
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              className="w-full border border-gray-300 p-3 mb-4 rounded-lg focus:outline-none focus:border-black text-black"
             />
             <select
               value={formData.type}
@@ -200,7 +194,7 @@ export default function LessonViewer() {
                   type: e.target.value as "video" | "pdf" | "link",
                 })
               }
-              className="w-full border p-2 mb-3 rounded"
+              className="w-full border border-gray-300 p-3 mb-4 rounded-lg focus:outline-none focus:border-black text-black"
             >
               <option value="video">Video</option>
               <option value="pdf">PDF</option>
@@ -210,21 +204,19 @@ export default function LessonViewer() {
               type="text"
               placeholder="Lesson URL"
               value={formData.url}
-              onChange={(e) =>
-                setFormData({ ...formData, url: e.target.value })
-              }
-              className="w-full border p-2 mb-3 rounded"
+              onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+              className="w-full border border-gray-300 p-3 mb-6 rounded-lg focus:outline-none focus:border-black text-black"
             />
-            <div className="flex justify-end gap-2 mt-4">
+            <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                className="px-6 py-3 bg-white text-black border border-gray-300 rounded-lg hover:bg-gray-50 font-medium transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSubmit}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 font-medium transition-colors"
               >
                 Save
               </button>
