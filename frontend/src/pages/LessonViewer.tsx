@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
+import { WebSocketContext } from "../context/WebSocketProvider" 
 
 interface Lesson {
   id: string
@@ -58,7 +59,30 @@ export default function LessonViewer() {
   const [activeTab, setActiveTab] = useState("content")
   const [ReactPlayer, setReactPlayer] = useState<any>(null)
 
-  
+  const socket = useContext(WebSocketContext) 
+
+  // ✅ WebSocket listener
+  useEffect(() => {
+    if (!socket) return
+
+    socket.onmessage = (event) => {
+      console.log("📩 WebSocket Update:", event.data)
+
+      try {
+        const update = JSON.parse(event.data)
+
+        // Example: update lesson if server sends { id, title, description, ... }
+        if (update.id && selectedLesson.id === update.id) {
+          setSelectedLesson((prev) => ({
+            ...prev,
+            ...update,
+          }))
+        }
+      } catch {
+        console.warn("Non-JSON message:", event.data)
+      }
+    }
+  }, [socket, selectedLesson.id])
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -110,11 +134,6 @@ export default function LessonViewer() {
           </div>
         )
       case "pdf":
-        return (
-          <div className="w-full h-[600px] rounded-lg border bg-gray-50">
-            <iframe src={selectedLesson.content} className="w-full h-full rounded-lg" title={selectedLesson.title} />
-          </div>
-        )
       case "link":
         return (
           <div className="w-full h-[600px] rounded-lg border bg-gray-50">
