@@ -1,7 +1,4 @@
-"use client"
 
-import { useState } from "react"
-import ReactPlayer from "react-player"
 
 type Lesson = {
   id: string
@@ -32,8 +29,7 @@ export default function LessonViewer() {
     },
   ])
 
-  const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null)
-  const [completedLessons, setCompletedLessons] = useState<string[]>([])
+
 
   // Modal state
   const [showForm, setShowForm] = useState(false)
@@ -61,10 +57,7 @@ export default function LessonViewer() {
     setShowForm(true)
   }
 
-  const handleSubmit = () => {
-    if (editingLesson) {
-      // Edit existing lesson
-      setLessons(lessons.map((lesson) => (lesson.id === editingLesson.id ? { ...lesson, ...formData } : lesson)))
+
     } else {
       // Add new lesson
       setLessons([...lessons, { id: Date.now().toString(), ...formData }])
