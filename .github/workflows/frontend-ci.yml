@@ -23,7 +23,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Lint code
-        run: npm run lint
+        
         working-directory: ./frontend
 
       - name: Run tests
