@@ -127,8 +127,8 @@ export default function InstructorDashboard() {
                       <span className="text-gray-600">📚</span>
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold text-gray-800">Assignment submitted</p>
-                      <p className="text-sm text-gray-600">JavaScript Fundamentals</p>
+                      <p className="font-semibold text-gray-800">Quizzes submitted</p>
+                      <p className="text-sm text-gray-600">Quiz Questions</p>
                     </div>
                     <span className="text-xs text-gray-500">1d ago</span>
                   </div>

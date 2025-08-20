@@ -6,6 +6,8 @@ import CourseCatalog from "./pages/CourseCatalog"
 import LessonViewer from "./pages/LessonViewer"
 import StudentDashboard from "./pages/StudentDashboard"
 import QuizPage from "./pages/QuizPage"
+import CertificatePage from "./pages/CertificatePage"
+import SupportPage from "./pages/SupportPage"
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
           <Route path="/lesson-viewer" element={<LessonViewer />} />
           <Route path="/student-dashboard" element={<StudentDashboard />} />
           <Route path="/quiz-page" element={<QuizPage />} />
+          <Route path="/certificate-page" element={<CertificatePage />} />
+          <Route path="/support-page" element={<SupportPage />} />
         </Routes>
       </Router>
     </WebSocketProvider>
