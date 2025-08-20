@@ -7,8 +7,8 @@ export default function Sidebar() {
     { name: "Students", path: "/student-dashboard", icon: "👩‍🎓" },
     { name: "View Lessons", path: "/lesson-viewer", icon: "👁️‍🗨️", isActive: false },
     { name: "Quizzes", path: "/quiz-page", icon: "📝", isActive: false },
-    { name: "Settings", path: "/settings", icon: "⚙️", isActive: false },
-    { name: "Support", path: "/support", icon: "💬", isActive: false },
+    { name: "Certificates", path: "/certificate-page", icon: "📃", isActive: false },
+    { name: "Get Help", path: "/support-page", icon: "💡", isActive: false},
   ]
 
   return (
@@ -104,25 +104,10 @@ export default function Sidebar() {
               <span className="text-xs text-gray-600">New Students</span>
               <span className="text-sm font-bold text-black">+12</span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600">Assignments</span>
-              <span className="text-sm font-bold text-black">24</span>
-            </div>
+           
           </div>
         </div>
 
-        {/* Help Section */}
-        <div className="bg-white rounded-2xl p-4 border border-gray-200">
-          <div className="text-center">
-            <div className="text-3xl mb-2">💡</div>
-            <h4 className="text-sm font-semibold text-black mb-2">Need Help?</h4>
-            <p className="text-xs text-gray-600 mb-3">Check our documentation or contact support</p>
-            <button className="w-full bg-black text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105">
-              Get Help
-            </button>
-          </div>
-        </div>
       </div>
-    </aside>
-  )
-}
+      </aside>
+  ) }
