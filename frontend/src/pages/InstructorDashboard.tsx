@@ -6,9 +6,9 @@ import { FaBook, FaUserGraduate, FaBox } from "react-icons/fa"
 
 export default function InstructorDashboard() {
   // Temporary placeholders
-  const notificationCount = 0
+  
   const performanceData = { growth: "12%", comparison: "↑ 5% vs last month" }
-  const activity = { timeAgo: "2h ago", message: "New student enrolled" }
+
 
   return (
     <div className="flex">
