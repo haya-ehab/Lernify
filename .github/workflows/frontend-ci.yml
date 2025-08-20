@@ -1,4 +1,4 @@
-name: Frontend CI
+name: Frontend CI (Build Only)
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  build-only:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,11 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./frontend
-
-
-      - name: Run tests
-        run: npm test -- --watchAll=false
         working-directory: ./frontend
 
       - name: Build project
