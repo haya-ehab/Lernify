@@ -1,4 +1,4 @@
-name: Frontend CI (Build Only)
+name: Frontend CI (Allow Warnings)
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-only:
+  build-and-lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./frontend
+
+      - name: Lint (warnings allowed)
+        run: npm run lint || true
         working-directory: ./frontend
 
       - name: Build project
