@@ -26,7 +26,7 @@ export function CardTitle({ className, children, ...props }: CardTitleProps) {
     <h3 className={cn("text-lg font-semibold leading-none tracking-tight", className)} {...props}>
       {children || "Card Title"}
     </h3>
-  );
+  )
 }
 
 export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
