@@ -1,22 +1,22 @@
-#  CodeRabbit config
+# CodeRabbit config
 
 reviews:
-  # Ignore certain file types or folders
   ignore:
     - "node_modules/**"
     - "dist/**"
     - "*.lock"
     - "*.snap"
 
-  # Only comment on important issues
   rules:
-    style: false        # stop flagging style issues
-    formatting: false   # stop nagging about prettier/eslint stuff
-    complexity: true    # keep comments about high complexity
-    security: true      # keep comments about security issues
+    style: true         # Enable style checks
+    formatting: true    # Enable formatting checks
+    complexity: true
+    security: true
 
-  # Don’t review drafts
   draft_prs: false
 
-  # Limit the number of comments
   max_comments: 8
+
+  # Always leave a summary comment even if no issues are found
+  always_comment: true
+  summary_only_if_no_issues: true
