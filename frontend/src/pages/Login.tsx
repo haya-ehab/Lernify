@@ -19,7 +19,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const onSubmit = (data: LoginFormData) => {
-    console.log("Login data:", data);
+ 
 
     // Redirect based on role
     if (data.role === "professor") {

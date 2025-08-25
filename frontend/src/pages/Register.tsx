@@ -19,17 +19,12 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const onSubmit = (data: RegisterFormData) => {
-    console.log("Register data:", data);
 
-    // Redirect based on role
-    if (data.role === "professor") {
-      navigate("/instructor-dashboard");
-    } else {
-      navigate("/student-dashboard");
-    }
-  };
+ const onSubmit = (data: RegisterFormData) => {
 
+   const target = data.role === "professor" ? "/instructor-dashboard" : "/student-dashboard";
+  navigate(target, { replace: true });
+ };
   return (
     <div className="min-h-screen flex items-center justify-center bg-white text-black px-4">
       <form
