@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import Sidebar from "../components/Sidebar"
 import Topbar from "../components/Topbar"
 import StatCard from "../components/StatCard"
@@ -5,10 +7,18 @@ import CreateCourseForm from "../components/CreateCourseForm"
 import { FaBook, FaUserGraduate, FaBox } from "react-icons/fa"
 
 export default function InstructorDashboard() {
-  // Temporary placeholders
-  
-  const performanceData = { growth: "12%", comparison: "↑ 5% vs last month" }
+  const navigate = useNavigate()
 
+  useEffect(() => {
+    // 🔐 Check if token exists
+    const token = localStorage.getItem("token") // or sessionStorage
+    if (!token) {
+      navigate("/login") // redirect if no token
+    }
+  }, [navigate])
+
+  // Temporary placeholders
+  const performanceData = { growth: "12%", comparison: "↑ 5% vs last month" }
 
   return (
     <div className="flex">
@@ -25,10 +35,12 @@ export default function InstructorDashboard() {
             <div className="relative z-10">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-4xl font-bold mb-3 text-white">Welcome back, Professor! 👋</h1>
+                  <h1 className="text-4xl font-bold mb-3 text-white">
+                    Welcome back, Professor! 👋
+                  </h1>
                   <p className="text-xl text-gray-300 mb-4 max-w-2xl">
-                    Your teaching dashboard is ready. Manage courses, track student progress, and create engaging
-                    content.
+                    Your teaching dashboard is ready. Manage courses, track student
+                    progress, and create engaging content.
                   </p>
                 </div>
               </div>
@@ -91,8 +103,12 @@ export default function InstructorDashboard() {
                       </div>
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-800 mb-1">Create New Course</h2>
-                      <p className="text-gray-600">Design engaging educational content</p>
+                      <h2 className="text-2xl font-bold text-gray-800 mb-1">
+                        Create New Course
+                      </h2>
+                      <p className="text-gray-600">
+                        Design engaging educational content
+                      </p>
                     </div>
                   </div>
                   <div className="hidden sm:flex items-center space-x-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
@@ -117,7 +133,9 @@ export default function InstructorDashboard() {
                       <span className="text-gray-600">🎓</span>
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold text-gray-800">New student enrolled</p>
+                      <p className="font-semibold text-gray-800">
+                        New student enrolled
+                      </p>
                       <p className="text-sm text-gray-600">2h ago</p>
                     </div>
                   </div>
