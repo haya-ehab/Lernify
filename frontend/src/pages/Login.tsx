@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 interface LoginFormData {
   email: string;
@@ -17,9 +18,14 @@ export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   const onSubmit = (data: LoginFormData) => {
- 
+    // 👇 Replace with API request to backend
+    const fakeToken = "fake-jwt-token-12345";
+
+    // Save token to context/localStorage
+    auth?.login(fakeToken);
 
     // Redirect based on role
     if (data.role === "professor") {

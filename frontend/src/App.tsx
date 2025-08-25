@@ -1,41 +1,103 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { WebSocketProvider } from "./context/WebSocketProvider"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { WebSocketProvider } from "./context/WebSocketProvider";
 
-import InstructorDashboard from "./pages/InstructorDashboard"
-import CreateCourseForm from "./components/CreateCourseForm"
-import CourseCatalog from "./pages/CourseCatalog"
-import LessonViewer from "./pages/LessonViewer"
-import StudentDashboard from "./pages/StudentDashboard"
-import QuizPage from "./pages/QuizPage"
-import CertificatePage from "./pages/CertificatePage"
-import SupportPage from "./pages/SupportPage"
+import InstructorDashboard from "./pages/InstructorDashboard";
+import CreateCourseForm from "./components/CreateCourseForm";
+import CourseCatalog from "./pages/CourseCatalog";
+import LessonViewer from "./pages/LessonViewer";
+import StudentDashboard from "./pages/StudentDashboard";
+import QuizPage from "./pages/QuizPage";
+import CertificatePage from "./pages/CertificatePage";
+import SupportPage from "./pages/SupportPage";
 
 // New pages
-import Login from "./pages/Login"
-import Register from "./pages/Register"
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+// Auth
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
-    <WebSocketProvider>
-      <Router>
-        <Routes>
-        
+    <AuthProvider>
+      <WebSocketProvider>
+        <Router>
+          <Routes>
+            {/* Protected app pages */}
+            <Route
+              path="/instructor-dashboard"
+              element={
+                <ProtectedRoute>
+                  <InstructorDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/create-course-form"
+              element={
+                <ProtectedRoute>
+                  <CreateCourseForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/course-catalog"
+              element={
+                <ProtectedRoute>
+                  <CourseCatalog />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/lesson-viewer"
+              element={
+                <ProtectedRoute>
+                  <LessonViewer />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/student-dashboard"
+              element={
+                <ProtectedRoute>
+                  <StudentDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/quiz-page"
+              element={
+                <ProtectedRoute>
+                  <QuizPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/certificate-page"
+              element={
+                <ProtectedRoute>
+                  <CertificatePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/support-page"
+              element={
+                <ProtectedRoute>
+                  <SupportPage />
+                </ProtectedRoute>
+              }
+            />
 
-          {/* Main app pages */}
-          <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
-          <Route path="/create-course-form" element={<CreateCourseForm />} />
-          <Route path="/course-catalog" element={<CourseCatalog />} />
-          <Route path="/lesson-viewer" element={<LessonViewer />} />
-          <Route path="/student-dashboard" element={<StudentDashboard />} />
-          <Route path="/quiz-page" element={<QuizPage />} />
-          <Route path="/certificate-page" element={<CertificatePage />} />
-          <Route path="/support-page" element={<SupportPage />} />
-          <Route path="/login" element={<Login />} />
-           <Route path="/register" element={<Register />} />
-        </Routes>
-      </Router>
-    </WebSocketProvider>
-  )
-}
+            {/* Public pages */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </Router>
+      </WebSocketProvider>
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;
