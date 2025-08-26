@@ -1,8 +1,19 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
 import { Progress } from "../components/ui/progress"
 import { Badge } from "../components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
-import { BookOpen, Clock, Users, Award } from "lucide-react"
+import { BookOpen, Clock, Users, Award, LogOut } from "lucide-react"
+import { useAuth } from "../context/AuthContext"
+import { useNavigate } from "react-router-dom"
+
+// Mock student data
+const student = {
+  name: "John Doe",
+  email: "john.doe@student.com",
+  avatar: "/student-avatar.png",
+}
 
 // Mock data for enrolled courses
 const enrolledCourses = [
@@ -45,32 +56,6 @@ const enrolledCourses = [
     estimatedTime: "1h 45m",
     image: "/placeholder-o72ja.png",
   },
-  {
-    id: 4,
-    title: "Node.js Backend Development",
-    instructor: "Alex Rodriguez",
-    progress: 30,
-    totalLessons: 28,
-    completedLessons: 8,
-    category: "Backend",
-    difficulty: "Intermediate",
-    nextLesson: "Express.js Middleware",
-    estimatedTime: "4h 20m",
-    image: "/nodejs-logo.png",
-  },
-  {
-    id: 5,
-    title: "Database Design with PostgreSQL",
-    instructor: "Lisa Wang",
-    progress: 60,
-    totalLessons: 16,
-    completedLessons: 10,
-    category: "Database",
-    difficulty: "Intermediate",
-    nextLesson: "Query Optimization",
-    estimatedTime: "2h 50m",
-    image: "/database-icon.png",
-  },
 ]
 
 const getDifficultyColor = (difficulty: string) => {
@@ -86,20 +71,48 @@ const getDifficultyColor = (difficulty: string) => {
   }
 }
 
-
-
 export default function StudentDashboard() {
   const totalCourses = enrolledCourses.length
   const completedCourses = enrolledCourses.filter((course) => course.progress === 100).length
-  const averageProgress = Math.round(enrolledCourses.reduce((sum, course) => sum + course.progress, 0) / totalCourses)
+  const averageProgress = Math.round(
+    enrolledCourses.reduce((sum, course) => sum + course.progress, 0) / totalCourses
+  )
+
+  const { logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout() // clears token from localStorage + context
+    navigate("/login") // redirect to login page
+  }
 
   return (
     <div className="min-h-screen bg-background p-4 md:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight">Student Dashboard</h1>
-          <p className="text-muted-foreground">Track your learning progress and continue your educational journey</p>
+        {/* Header with Student Info + Logout */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Student Dashboard</h1>
+            <p className="text-muted-foreground">Welcome back, {student.name}!</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Avatar className="h-10 w-10">
+                <AvatarImage src={student.avatar} alt={student.name} />
+                <AvatarFallback>{student.name.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <div className="hidden md:block">
+                <p className="font-medium">{student.name}</p>
+                <p className="text-xs text-muted-foreground">{student.email}</p>
+              </div>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+            >
+              <LogOut className="h-4 w-4" /> Logout
+            </button>
+          </div>
         </div>
 
         {/* Stats Overview */}
