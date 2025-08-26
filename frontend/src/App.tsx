@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { WebSocketProvider } from "./context/WebSocketProvider";
-
+import { Toaster } from "react-hot-toast";
 import InstructorDashboard from "./pages/InstructorDashboard";
 import CreateCourseForm from "./components/CreateCourseForm";
 import CourseCatalog from "./pages/CourseCatalog";
@@ -23,6 +23,9 @@ const App = () => {
     <AuthProvider>
       <WebSocketProvider>
         <Router>
+          {/* Toast notifications */}
+          <Toaster position="top-right" reverseOrder={false} />
+
           <Routes>
             {/* Protected app pages */}
             <Route
