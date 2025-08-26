@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { Star, Users, Clock, Search } from "lucide-react";
+import { Star, Users, Search } from "lucide-react";
 
 type Course = {
   id: number;
