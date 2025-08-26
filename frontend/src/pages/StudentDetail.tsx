@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, Star, Clock, CheckCircle, Search } from "lucide-react";
+import { Star, Clock, CheckCircle, Search } from "lucide-react";
 
 type Student = {
   id: number;
