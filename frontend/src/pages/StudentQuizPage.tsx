@@ -9,7 +9,7 @@ interface Question {
 }
 
 export default function StudentQuizPage() {
-  const { token } = useAuth();
+
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [submitted, setSubmitted] = useState(false);
