@@ -18,12 +18,6 @@ import {
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-// Mock data
-const student = {
-  name: "John Doe",
-  email: "john.doe@student.com",
-  avatar: "/student-avatar.png",
-};
 
 const enrolledCourses = [
   {
