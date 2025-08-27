@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Search, Filter, DollarSign, Clock, Users, Star } from "lucide-react"
+import { useState } from "react";
+import { Search, Filter, DollarSign, Clock, Users, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const mockCourses = [
   {
@@ -9,7 +10,7 @@ const mockCourses = [
     title: "React for Beginners",
     category: "Web Development",
     price: 29,
-    img: "/modern-react-workspace.png",
+    img: "/reactcourse.jpg",
     duration: "8 weeks",
     students: 1240,
     rating: 4.8,
@@ -20,7 +21,7 @@ const mockCourses = [
     title: "Advanced CSS & Design Systems",
     category: "Web Development",
     price: 49,
-    img: "/css-design-system-interface.png",
+    img: "/css course.png",
     duration: "6 weeks",
     students: 890,
     rating: 4.9,
@@ -31,7 +32,7 @@ const mockCourses = [
     title: "Data Science Fundamentals",
     category: "Data Science",
     price: 59,
-    img: "/data-visualization-charts-graphs.png",
+    img: "/dscourse.png",
     duration: "10 weeks",
     students: 2100,
     rating: 4.7,
@@ -42,23 +43,25 @@ const mockCourses = [
     title: "Introduction to Machine Learning",
     category: "AI",
     price: 79,
-    img: "/ai-neural-network.png",
+    img: "/mlcourse.png",
     duration: "12 weeks",
     students: 1560,
     rating: 4.8,
     instructor: "Alex Kumar",
   },
-]
+];
 
 export default function CourseCatalog() {
-  const [category, setCategory] = useState("")
-  const [maxPrice, setMaxPrice] = useState(100)
+  const [category, setCategory] = useState("");
+  const [maxPrice, setMaxPrice] = useState(100);
 
-  const categories = ["Web Development", "Data Science", "AI"]
+  const categories = ["Web Development", "Data Science", "AI"];
 
   const filteredCourses = mockCourses.filter(
-    (course) => (category === "" || course.category === category) && course.price <= maxPrice,
-  )
+    (course) =>
+      (category === "" || course.category === category) &&
+      course.price <= maxPrice
+  );
 
   return (
     <div className="min-h-screen bg-white">
@@ -66,9 +69,15 @@ export default function CourseCatalog() {
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-black mb-4">Course Catalog</h1>
+            <h1 className="text-4xl font-bold text-black mb-4">
+              Course Catalog
+            </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover our comprehensive collection of courses designed to advance your career and expand your skillset
+              Discover our comprehensive collection of courses designed to
+              advance your career and expand your skillset
+              <br />
+               Discuss Courses Here.
+          <a href="/course-details/:id" className="text-blue-600 underline">Click Here</a>
             </p>
           </div>
         </div>
@@ -84,7 +93,9 @@ export default function CourseCatalog() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-black mb-2">Category</label>
+              <label className="block text-sm font-medium text-black mb-2">
+                Category
+              </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -100,7 +111,9 @@ export default function CourseCatalog() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-black mb-2">Maximum Price: ${maxPrice}</label>
+              <label className="block text-sm font-medium text-black mb-2">
+                Maximum Price: ${maxPrice}
+              </label>
               <input
                 type="range"
                 min="0"
@@ -123,7 +136,8 @@ export default function CourseCatalog() {
         {/* Results Header */}
         <div className="flex items-center justify-between mb-6">
           <p className="text-gray-600">
-            Showing {filteredCourses.length} course{filteredCourses.length !== 1 ? "s" : ""}
+            Showing {filteredCourses.length} course
+            {filteredCourses.length !== 1 ? "s" : ""}
           </p>
         </div>
 
@@ -149,10 +163,14 @@ export default function CourseCatalog() {
 
               <div className="p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-lg font-semibold text-black line-clamp-2 flex-1">{course.title}</h3>
+                  <h3 className="text-lg font-semibold text-black line-clamp-2 flex-1">
+                    {course.title}
+                  </h3>
                 </div>
 
-                <p className="text-sm text-gray-600 mb-4">by {course.instructor}</p>
+                <p className="text-sm text-gray-600 mb-4">
+                  by {course.instructor}
+                </p>
 
                 <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
                   <div className="flex items-center gap-1">
@@ -172,11 +190,15 @@ export default function CourseCatalog() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <DollarSign className="w-5 h-5 text-black" />
-                    <span className="text-2xl font-bold text-black">{course.price}</span>
+                    <span className="text-2xl font-bold text-black">
+                      {course.price}
+                    </span>
                   </div>
-                  <button className="px-6 py-2 bg-black hover:bg-gray-800 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                    Enroll Now
-                  </button>
+                  <Link to={`/courses/${course.id}`}>
+                    <button className="px-6 py-2 bg-black hover:bg-gray-800 text-white font-medium rounded-lg transition">
+                      View Course
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -189,13 +211,16 @@ export default function CourseCatalog() {
             <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
               <Search className="w-10 h-10 text-gray-400" />
             </div>
-            <h3 className="text-xl font-semibold text-black mb-2">No courses found</h3>
+            <h3 className="text-xl font-semibold text-black mb-2">
+              No courses found
+            </h3>
             <p className="text-gray-600 max-w-md mx-auto">
-              Try adjusting your filters to find more courses that match your interests.
+              Try adjusting your filters to find more courses that match your
+              interests.
             </p>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }

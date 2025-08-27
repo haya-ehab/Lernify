@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 export default function Sidebar() {
   const menuItems = [
     { name: "Your Dashboard", path: "/instructor-dashboard", icon: "📊" },
-    { name: "Courses", path: "/course-catalog", icon: "📚", isActive: false },
-    { name: "Students", path: "/student-dashboard", icon: "👩‍🎓" },
+    { name: "My Courses", path: "/instructor-courses", icon: "📚", isActive: false },
+    { name: "Students", path: "/student-detail", icon: "👩‍🎓" },
     { name: "View Lessons", path: "/lesson-viewer", icon: "👁️‍🗨️", isActive: false },
     { name: "Quizzes", path: "/quiz-page", icon: "📝", isActive: false },
     { name: "Certificates", path: "/certificate-page", icon: "📃", isActive: false },

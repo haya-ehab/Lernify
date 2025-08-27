@@ -9,7 +9,9 @@ import StudentDashboard from "./pages/StudentDashboard";
 import QuizPage from "./pages/QuizPage";
 import CertificatePage from "./pages/CertificatePage";
 import SupportPage from "./pages/SupportPage";
-
+import StudentQuizPage from "./pages/StudentQuizPage";
+import CertificateStudent from "./pages/CertificateStudent";
+import QuizStudent from "./pages/QuizStudent";
 // New pages
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -17,6 +19,9 @@ import Register from "./pages/Register";
 // Auth
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CourseDetails from "./pages/CourseDetails";
+import StudentDetail from "./pages/StudentDetail";
+import InstructorCourses from "./pages/InstructorCourses";
 
 const App = () => {
   return (
@@ -62,10 +67,14 @@ const App = () => {
             />
             <Route
               path="/student-dashboard"
+             
               element={
                 <ProtectedRoute>
                   <StudentDashboard />
                 </ProtectedRoute>
+                
+
+              
               }
             />
             <Route
@@ -96,6 +105,12 @@ const App = () => {
             {/* Public pages */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/student-quiz-page" element={<StudentQuizPage />} />
+            <Route path="/certificate-student" element={<CertificateStudent />} />
+            <Route path="/quiz-student" element={<QuizStudent />} />
+            <Route path="/course-details/:id" element={<CourseDetails />} />
+            <Route path="/student-detail" element={<StudentDetail />} />
+            <Route path="/instructor-courses" element={<InstructorCourses />} />
           </Routes>
         </Router>
       </WebSocketProvider>
