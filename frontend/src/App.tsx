@@ -12,6 +12,7 @@ import SupportPage from "./pages/SupportPage";
 import StudentQuizPage from "./pages/StudentQuizPage";
 import CertificateStudent from "./pages/CertificateStudent";
 import QuizStudent from "./pages/QuizStudent";
+import MetricsDashboard from "./components/MetricsDashboard";
 // New pages
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -111,6 +112,7 @@ const App = () => {
             <Route path="/course-details/:id" element={<CourseDetails />} />
             <Route path="/student-detail" element={<StudentDetail />} />
             <Route path="/instructor-courses" element={<InstructorCourses />} />
+            <Route path="/metrics-dashboard" element={<MetricsDashboard />} />
           </Routes>
         </Router>
       </WebSocketProvider>

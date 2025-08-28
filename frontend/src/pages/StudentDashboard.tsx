@@ -89,6 +89,7 @@ export default function StudentDashboard() {
           <Link to="/quiz-student" className="hover:underline">Quizzes</Link>
           <Link to="/certificate-student" className="hover:underline">Certificates</Link>
           <Link to="/support-page" className="hover:underline">Support</Link>
+          <Link to="/metrics-dashboard" className="hover:underline">Productivity Metrics</Link>
         </nav>
         <button
           onClick={handleLogout}
