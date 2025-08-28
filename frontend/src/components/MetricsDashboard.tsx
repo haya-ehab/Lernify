@@ -35,7 +35,7 @@ const MOCK_DATA: MetricPoint[] = [
 
 export default function MetricsDashboard() {
   const [data, setData] = useState<MetricPoint[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [chartType, setChartType] = useState<"line" | "bar">("line");
 
   useEffect(() => {
